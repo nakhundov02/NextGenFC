@@ -1,0 +1,229 @@
+<!DOCTYPE html> 
+
+<html lang="en"> 
+
+<head> 
+
+    <meta charset="UTF-8"> 
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+    <title>NextGenFC- Share Your Rising Stars</title> 
+
+    <style> 
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #1A1A19;
+            margin: 0;
+            padding: 20px;
+
+        }
+        .menu-bar {
+            background-color: #31511E; /* Black bar background */
+            padding: 10px 0; /* Padding for better appearance */
+            display: flex;
+            border:2px solid rgb(25, 148, 0);
+            border-radius: 5px;
+            height: 100px;
+            justify-content: center; /* Center the menu items */
+        }
+
+        .menu-bar a {
+            color: rgb(255, 255, 255); /* Text color */
+            text-decoration: none; /* Remove underline from links */
+            margin: 0 50px; /* Spacing between links */
+            font-size: 35px; /* Font size */
+            position: relative;
+            top: 23px;
+        }
+
+        .menu-bar a:hover {
+            color: #859F3D; /* Change text color on hover */
+        }
+        .menu-bar img{
+            height: 100px;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+      
+        .image-gallery {
+            margin-top: 20px;
+        }
+        .image-gallery img {
+            max-width: 1000px; /* Limits image width */
+            height: auto;
+            width: auto;
+            border: 2px solid rgb(25, 148, 0);
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        form { 
+
+            display: inline-block; 
+
+            text-align: left; 
+
+            background-color: #fff; 
+
+            padding: 20px; 
+            width: 60%;
+
+            border-radius: 10px; 
+
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+
+        } 
+
+        input, button { 
+
+            display: block; 
+
+            width: 97.5%; 
+
+            margin-bottom: 10px; 
+
+            padding: 10px; 
+
+        } 
+
+        button { 
+
+            background-color: #4e44a7; 
+
+            color: white; 
+            width: 100%;
+
+            border: none; 
+
+            border-radius: 5px; 
+
+        } 
+        .back-to-home {
+            margin-top: 30px;
+        }
+        .back-to-home a {
+    color: white; /* Link color */
+    text-decoration: none; /* Remove underline */
+    font-size: 16px; /* Adjust font size */
+    background-color: #31511E; /* Optional: Add background for better visibility */
+    padding: 10px 25px; /* Add padding around the text */
+    border-radius: 5px; /* Optional: Rounded corners */
+    }
+
+    .back-to-home a:hover {
+    color: #859F3D; /* Change color on hover */
+        }
+        
+
+    </style> 
+
+    <!-- Firebase SDK --> 
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script> 
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js"></script> 
+
+    <script> 
+
+        // Firebase configuration copied from Firebase Console 
+
+        var firebaseConfig = { 
+
+            apiKey: "AIzaSyDNS7ts8XZf7ioQm9YY66NfPtoPTHX5GXk",
+            authDomain: "nextgenfc-2fb2a.firebaseapp.com",
+            databaseURL: "https://nextgenfc-2fb2a-default-rtdb.europe-west1.firebasedatabase.app",
+            projectId: "nextgenfc-2fb2a",
+            storageBucket: "nextgenfc-2fb2a.firebasestorage.app",
+            messagingSenderId: "486234336074",
+            appId: "1:486234336074:web:9ef3618ac9e2e0c53e2fb3",
+            measurementId: "G-CV9M25HBP9"
+
+        }; 
+
+ 
+
+        // Initialize Firebase 
+
+        firebase.initializeApp(firebaseConfig); 
+
+ 
+
+        // Reference to the Realtime Database 
+
+        var database = firebase.database(); 
+
+         
+
+        // Function to submit data to Firebase 
+
+        function submitContactForm(event) { 
+
+            event.preventDefault(); // Prevent the form from refreshing the page 
+
+            var name = document.getElementById("name").value; 
+
+            var email = document.getElementById("email").value; 
+
+ 
+
+            // Save data to Firebase 
+
+            database.ref('contacts').push({ 
+
+                name: name, 
+
+                email: email 
+
+            }).then(function() { 
+
+                alert("Thank you for submitting!"); 
+
+            }).catch(function(error) { 
+
+                alert("Error: " + error.message); 
+
+            }); 
+
+ 
+
+            // Clear the form fields 
+
+            document.getElementById("contactForm").reset(); 
+
+        } 
+
+    </script> 
+
+</head> 
+
+<body> 
+    <div class="menu-bar">
+        <a href="index.html">Homepage</a>
+        <a href="Wonderkids.html">Wonderkids</a>
+        <a href="Hidden Gems.html">Hidden Gems</a>
+        <a href="Share your hidden gems.html">Share Your Rising Stars</a>
+        <img src="Screenshot_2024-11-15_at_09.47.25-removebg-preview.png" alt="Logo" class="Logo">
+    </div>
+    <h1 style="color: #859F3D;">Share Your Rising Star</h1> 
+    <div class="image-gallery">
+        <img src="cheap-gems-fc25-career-mode-620x330.jpg" alt="hidden gems">
+    <p style="color: white;">Here, you can input and showcase your favorite hidden gems—players who might not be well-known yet but have immense potential. Share your insights, contribute to the community, and help others find the next big stars in football. By working together, we can build a comprehensive list of affordable, high-potential players for everyone to explore. Start sharing your hidden gems today and let’s uncover future legends together!</p>
+
+    <form id="contactForm" onsubmit="submitContactForm(event)"> 
+
+        <input type="text" id="name" name="name" placeholder="Name of Player,Club,his rating,and potential ( Arda Guler,Real Madrid CF,78,90)" required> 
+
+        <input type="email" id="email" name="email" placeholder="Your Email Adress ( nextgenfc@gmail.com)" required> 
+
+        <button type="submit">Submit</button> 
+
+    </form> 
+    <div class="back-to-home">
+        <a href="index.html">Back to Home</a> 
+    </div>  
+</body> 
+
+</html> 
